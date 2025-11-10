@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "ask": [
+      "Read(!C:\\Users\\cogni\\Downloads\\hamath-opc-website/**)",
+      "Edit(!C:\\Users\\cogni\\Downloads\\hamath-opc-website/**)"
+    ],
+    "allow": [
+      "Read(C:\\Users\\cogni\\Downloads\\hamath-opc-website/**)",
+      "Edit(C:\\Users\\cogni\\Downloads\\hamath-opc-website/**)"
+    ]
+  },
+  "memoryImport": {},
+  "monitoring": {}
+}
