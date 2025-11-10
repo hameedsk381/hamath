@@ -14,6 +14,7 @@ import {
   Database,
   Shield,
   TrendingUp,
+  Menu,
 } from "lucide-react"
 import Link from "next/link"
 import { FloatingElements } from "@/components/floating-elements"
@@ -24,6 +25,7 @@ import { BlurText } from "@/components/blur-text"
 import { CardSwap } from "@/components/card-swap"
 import { InfiniteScroll } from "@/components/infinite-scroll"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { MobileMenu } from "@/components/mobile-menu"
 
 export default function HomePage() {
   return (
@@ -51,6 +53,7 @@ export default function HomePage() {
               <ThemeToggle />
               <Button>Get Started</Button>
             </div>
+            <MobileMenu />
           </div>
         </div>
       </nav>
