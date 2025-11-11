@@ -29,44 +29,20 @@ import { InfiniteScroll } from "@/components/infinite-scroll"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { MobileMenu } from "@/components/mobile-menu"
 import { useState, useEffect } from "react"
+import CalEmbed from "@calcom/embed-react"
 
-// Cal.com Integration:
-// 1. Script is loaded in app/layout.tsx
-// 2. Widget is initialized in useEffect hook
-// 3. Schedule Demo button opens the Cal.com widget
+// Cal.com Integration using @calcom/embed-react
 
 export default function HomePage() {
-  const [showCalCom, setShowCalCom] = useState(false)
+  const [isCalOpen, setIsCalOpen] = useState(false)
   
   const openCalCom = () => {
-    if (typeof window !== 'undefined') {
-      // Check if Cal is already loaded
-      if ((window as any).Cal) {
-        try {
-          (window as any).Cal("open", {calLink: "hamath/demo"})
-        } catch (error) {
-          // Fallback: open in new tab if embed fails
-          (window as any).open("https://book.hamathopc.in/hamath/demo", "_blank")
-        }
-      } else {
-        // If Cal is not loaded yet, load it and then open
-        const script = document.createElement("script")
-        script.src = "https://book.hamathopc.in/embed.js"
-        script.async = true
-        script.onload = () => {
-          (window as any).Cal("init", {origin: "https://book.hamathopc.in"})
-          (window as any).Cal("open", {calLink: "hamath/demo"})
-        }
-        script.onerror = () => {
-          // Fallback: open in new tab if embed fails
-          (window as any).open("https://book.hamathopc.in/hamath/demo", "_blank")
-        }
-        document.head.appendChild(script)
-      }
-    } else {
-      // Fallback for server-side rendering
-      (window as any).open("https://book.hamathopc.in/hamath/demo", "_blank")
-    }
+    setIsCalOpen(true)
+  }
+  
+  // Close Cal.com modal
+  const closeCalCom = () => {
+    setIsCalOpen(false)
   }
   
   // We don't need to preload the script since we're loading it on demand
@@ -502,6 +478,31 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+      
+      {/* Cal.com Embed Modal */}
+      {isCalOpen && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-background rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-auto">
+            <div className="p-4 border-b flex justify-between items-center">
+              <h3 className="text-lg font-semibold">Schedule a Demo</h3>
+              <Button variant="ghost" size="sm" onClick={closeCalCom}>
+                Close
+              </Button>
+            </div>
+            <div className="p-4">
+              <CalEmbed
+  calLink="hamath"
+  calOrigin="https://book.hamathopc.in"
+  config={{
+    layout: "month_view",
+  }}
+  style={{ height: "700px", width: "100%" }}
+/>
+
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
