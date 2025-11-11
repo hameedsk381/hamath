@@ -16,7 +16,6 @@ const projects = [
     url: "https://fossap.in",
     category: "Website Development",
     technologies: ["React", "Next.js", "Tailwind CSS"],
-    image: "/placeholder-1.jpg",
     featured: true
   },
   {
@@ -26,7 +25,6 @@ const projects = [
     url: "https://yesj.in",
     category: "Web Application",
     technologies: ["React", "Node.js", "MongoDB"],
-    image: "/placeholder-2.jpg",
     featured: true
   },
   {
@@ -36,7 +34,6 @@ const projects = [
     url: "https://mohuna.media",
     category: "Media Platform",
     technologies: ["WordPress", "PHP", "MySQL"],
-    image: "/placeholder-3.jpg",
     featured: false
   },
   {
@@ -46,7 +43,6 @@ const projects = [
     url: "https://uppraisalconsultant.in",
     category: "Business Website",
     technologies: ["React", "Next.js", "Firebase"],
-    image: "/placeholder-4.jpg",
     featured: false
   },
   {
@@ -56,7 +52,6 @@ const projects = [
     url: "https://stpeterslutheranchurchvja.in/",
     category: "Non-Profit Website",
     technologies: ["WordPress", "Custom Theme", "SEO"],
-    image: "/placeholder-5.jpg",
     featured: false
   },
   {
@@ -66,7 +61,6 @@ const projects = [
     url: "https://christhekingvijayawada.com/",
     category: "Religious Website",
     technologies: ["React", "Next.js", "Strapi CMS"],
-    image: "/placeholder-6.jpg",
     featured: true
   },
   {
@@ -76,7 +70,6 @@ const projects = [
     url: "https://adarshemschool.in",
     category: "Educational Website",
     technologies: ["React", "Next.js", "MongoDB"],
-    image: "/placeholder-7.jpg",
     featured: true
   }
 ]
@@ -128,7 +121,7 @@ export default function PortfolioPage() {
             <Badge variant="secondary" className="mb-6">
               Our Work
             </Badge>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-balance mb-8">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-balance mb-8 font-title">
               Project <span className="text-primary">Portfolio</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground text-pretty mb-12 max-w-3xl mx-auto">
@@ -159,15 +152,10 @@ export default function PortfolioPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project) => (
               <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-all duration-300">
-                <div className="relative h-48 bg-muted">
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-accent/20">
-                    <Globe className="h-16 w-16 text-primary/30" />
-                  </div>
-                </div>
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle className="text-xl mb-2">{project.title}</CardTitle>
+                      <CardTitle className="text-xl mb-2 font-sans">{project.title}</CardTitle>
                       <Badge variant="secondary">{project.category}</Badge>
                     </div>
                     <Link href={project.url} target="_blank" rel="noopener noreferrer">
@@ -202,7 +190,7 @@ export default function PortfolioPage() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-accent text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Project?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-sans">Ready to Start Your Project?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
             Let's discuss how we can transform your ideas into reality with our digital solutions.
           </p>
@@ -249,7 +237,7 @@ export default function PortfolioPage() {
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4">Services</h3>
+              <h3 className="font-semibold mb-4 font-sans">Services</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>Website Development</li>
                 <li>App Development</li>
@@ -261,7 +249,7 @@ export default function PortfolioPage() {
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4">Company</h3>
+              <h3 className="font-semibold mb-4 font-sans">Company</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/#about" className="hover:text-foreground transition-colors">
