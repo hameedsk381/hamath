@@ -6,7 +6,7 @@ import localFont from "next/font/local"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { ThemeProvider } from "@/components/theme-provider"
-import { TargetCursor } from "@/components/target-cursor"
+
 import { LiquidEtherBackground } from "@/components/liquid-ether-background"
 import "./globals.css"
 
@@ -117,7 +117,6 @@ export default function RootLayout({
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${cubaoNarrow.variable} ${cubaoRegular.variable} ${cubaoWide.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <LiquidEtherBackground />
-          <TargetCursor />
           <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         </ThemeProvider>
         <Analytics />
