@@ -13,6 +13,7 @@ export function MobileMenu() {
   const navItems = [
     { name: "Services", href: "#services" },
     { name: "About", href: "#about" },
+    { name: "Portfolio", href: "/portfolio" },
     { name: "Solutions", href: "#solutions" },
     { name: "Contact", href: "#contact" },
   ]

@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -26,8 +28,50 @@ import { CardSwap } from "@/components/card-swap"
 import { InfiniteScroll } from "@/components/infinite-scroll"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { MobileMenu } from "@/components/mobile-menu"
+import { useState, useEffect } from "react"
+
+// Cal.com Integration:
+// 1. Script is loaded in app/layout.tsx
+// 2. Widget is initialized in useEffect hook
+// 3. Schedule Demo button opens the Cal.com widget
 
 export default function HomePage() {
+  const [showCalCom, setShowCalCom] = useState(false)
+  
+  const openCalCom = () => {
+    if (typeof window !== 'undefined') {
+      // Check if Cal is already loaded
+      if ((window as any).Cal) {
+        try {
+          (window as any).Cal("open", {calLink: "hamath/demo"})
+        } catch (error) {
+          // Fallback: open in new tab if embed fails
+          (window as any).open("https://book.hamathopc.in/hamath/demo", "_blank")
+        }
+      } else {
+        // If Cal is not loaded yet, load it and then open
+        const script = document.createElement("script")
+        script.src = "https://book.hamathopc.in/embed.js"
+        script.async = true
+        script.onload = () => {
+          (window as any).Cal("init", {origin: "https://book.hamathopc.in"})
+          (window as any).Cal("open", {calLink: "hamath/demo"})
+        }
+        script.onerror = () => {
+          // Fallback: open in new tab if embed fails
+          (window as any).open("https://book.hamathopc.in/hamath/demo", "_blank")
+        }
+        document.head.appendChild(script)
+      }
+    } else {
+      // Fallback for server-side rendering
+      (window as any).open("https://book.hamathopc.in/hamath/demo", "_blank")
+    }
+  }
+  
+  // We don't need to preload the script since we're loading it on demand
+  useEffect(() => {}, [])
+  
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -43,6 +87,9 @@ export default function HomePage() {
               </Link>
               <Link href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
                 About
+              </Link>
+              <Link href="/portfolio" className="text-muted-foreground hover:text-foreground transition-colors">
+                Portfolio
               </Link>
               <Link href="#solutions" className="text-muted-foreground hover:text-foreground transition-colors">
                 Solutions
@@ -79,11 +126,15 @@ export default function HomePage() {
               mobile applications, and strategic digital marketing that help brands stand out and achieve measurable results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8 py-6">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={openCalCom}
+              >
                 Start Your Project
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-6 bg-transparent">
+              <Button variant="outline" size="lg" className="text-lg px-8 py-6 bg-transparent" onClick={openCalCom}>
                 Schedule Demo
               </Button>
             </div>
@@ -341,7 +392,11 @@ export default function HomePage() {
           </div>
 
           <div className="text-center">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6"
+              onClick={openCalCom}
+            >
               Explore Our Services
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
@@ -358,7 +413,11 @@ export default function HomePage() {
             create exceptional digital experiences for your brand.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-6 bg-white text-primary hover:bg-white/90">
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6 bg-white text-primary hover:bg-white/90"
+              onClick={openCalCom}
+            >
               Get Free Consultation
             </Button>
             <Button
@@ -417,6 +476,11 @@ export default function HomePage() {
                 <li>
                   <Link href="#services" className="hover:text-foreground transition-colors">
                     Our Services
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/portfolio" className="hover:text-foreground transition-colors">
+                    Portfolio
                   </Link>
                 </li>
                 <li>
